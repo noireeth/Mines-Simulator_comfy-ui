@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mines Game</h1>
+            <div class="money-counter">
+                Balance: $<span id="balance">5.00</span> 
+                <span id="multiplier" class="multiplier"></span>
+            </div>
+            <div class="control-panel">
+                <div class="input-group">
+                    <label for="bet">Bet Amount:</label>
+                    <input type="number" id="bet" value="1.00" step="0.01" min="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="bombs">Bombs:</label>
+                    <input type="number" id="bombs" value="3" min="1" max="24">
+                </div>
+                <button onclick="startGame()" class="soft-button">Bet</button>
+                <button id="cashoutButton" onclick="cashout()" disabled class="soft-button">Cashout</button>
+                <button onclick="toggleSound()" id="volumeButton" class="soft-button">🔊</button>
+                <button onclick="toggleMusic()" id="musicButton" class="soft-button">🎵 Lofi</button>
+            </div>
+        </div>
+        <div id="grid" class="grid"></div>
+        <div id="result" class="result"></div>
+        <button id="achievementsButton" onclick="toggleAchievements()" class="soft-button">View Achievements</button>
+        <div id="achievementNotification" class="achievement-notification"></div>
+        <div id="achievements" class="achievements hidden">
+            <h2>Achievements</h2>
+            <ul id="achievementsList"></ul>
+        </div>
+    </div>
+
+    <audio id="diamondSound" src="soundfx/diamond.mp3"></audio>
+    <audio id="bombSound" src="soundfx/bomb.mp3"></audio>
+    <audio id="cashoutSound" src="soundfx/cashout.mp3"></audio>
+    <audio id="betSound" src="soundfx/bet.mp3"></audio>
+    <audio id="increaseDecreaseSound" src="soundfx/increase_decrease.mp3"></audio>
+    <audio id="achievementBannerSound" src="soundfx/achievement_banner.mp3"></audio>
+    <audio id="achievementsOpeningSound" src="soundfx/achievementsopening.mp3"></audio>
+    <audio id="rareSound" src="soundfx/rare.mp3"></audio>
+    <audio id="lofiMusic" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

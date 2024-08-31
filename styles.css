@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2c2f33;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #23272a;
+    padding: 20px;
+    border-radius: 15px;
+    width: 340px;
+    position: relative;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.money-counter {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.multiplier {
+    color: #2ecc71;
+    font-weight: 600;
+    margin-left: 10px;
+    animation: popAnimation 0.3s ease-in-out;
+}
+
+@keyframes popAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+label {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+input {
+    width: 70px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #99aab5;
+    color: #2c2f33;
+}
+
+button.soft-button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #7289da;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    margin-bottom: 10px;
+    font-family: 'Nunito', sans-serif;
+}
+
+button.soft-button:hover {
+    background-color: #5a6ea6;
+}
+
+button.soft-button:disabled {
+    background-color: #4b5e87;
+    cursor: not-allowed;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.grid .cell {
+    background-color: #99aab5;
+    border-radius: 10px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 1.5em;
+    user-select: none;
+}
+
+.grid .cell:hover {
+    transform: scale(1.05);
+}
+
+.grid .cell.revealed {
+    cursor: default;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.achievement-notification {
+    position: absolute;
+    right: -300px;
+    top: 50px;
+    width: 200px;
+    padding: 15px;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.9em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: right 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+.achievement-notification.show {
+    right: 10px;
+    opacity: 1;
+}
+
+.achievements {
+    margin-top: 20px;
+    background-color: #2c2f33;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.achievements.hidden {
+    display: none;
+}
+
+.achievements h2 {
+    margin-bottom: 10px;
+}
+
+.achievements ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.achievements li {
+    background-color: #7289da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.achievements li.locked {
+    background-color: #99aab5;
+    color: #2c2f33;
+}
+
+.achievements li .status {
+    font-size: 1.2em;
+}
+
