@@ -17,3 +17,5 @@ Here are some improvements that I'm currently working on
  - The new formula for the multipliers: for each extra bomb in the game, starting from x1.1 (for one bomb), you +0.3 to the multiplier.
    Then for each tile uncovered in the round it's (number of tiles clicked) x 0.1 (that goes up by x0.1 for every extra tile clicked).
  - Add a simple global chat at the bottom
+
+![Screenshot 2024-08-31 141724](https://github.com/user-attachments/assets/418d70aa-c269-4de0-b474-92512feb3889)
