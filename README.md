@@ -1,6 +1,7 @@
-# Stake.com-Mines-simulator V.comfy
-A game inspired by Stake.com Mines. Small side project, feel free to give me suggestions and add my discord: @qex404      to help me keep adding more stuff
+# Mines Simulator - comfy ui/ux
+A game inspired by Stake.com Mines. Small side project, feel free to give me suggestions and add my discord: @qex404 to be co-owner
 
+<br />   
 Here are some improvements that I'm currently working on
 
 - Sounds to add: 
