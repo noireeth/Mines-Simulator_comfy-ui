@@ -12,6 +12,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow-y: auto; /* Enable scrolling */
 }
 
 .container {
@@ -100,15 +101,15 @@ button.soft-button:disabled {
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
+    gap: 6px; /* Equal distance horizontally and vertically */
     margin: 10px 0;
 }
 
 .grid .cell {
     background-color: #99aab5;
     border-radius: 10px;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -158,6 +159,8 @@ button.soft-button:disabled {
     padding: 10px;
     border-radius: 10px;
     text-align: left;
+    max-height: 200px; /* Set max height for achievements list */
+    overflow-y: auto;  /* Enable scrolling within the achievements list */
 }
 
 .achievements.hidden {
@@ -192,4 +195,3 @@ button.soft-button:disabled {
 .achievements li .status {
     font-size: 1.2em;
 }
-
