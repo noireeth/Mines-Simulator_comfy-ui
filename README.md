@@ -2,9 +2,9 @@
 A game inspired by Stake.com Mines. Small side project, feel free to give me suggestions and add my discord: @qex404 to be co-owner
 
 <br />   
-If you want to recomend me a feature just DM me!
+If you want to recomend me a feature just DM me
 <br />
-ㅤ↳ always open to new ideas
+ㅤ↳ always open to new ideas!
 <br />
  ㅤ<br />
 <br />
