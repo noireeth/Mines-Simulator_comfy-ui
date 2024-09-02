@@ -4,6 +4,7 @@ let bombPositions = [];
 let revealedCells = 0;
 let multiplier = 1;
 let initialBet = 0;
+let currentTrack = null;
 const achievements = [
     { name: "Reach a net worth of $100", achieved: false },
     { name: "Reach a net worth of $1k", achieved: false },
@@ -12,23 +13,26 @@ const achievements = [
     { name: "Win 5 times in a row on 24/25 bombs", achieved: false },
     { name: "Rare Sound Achievement", achieved: false }
 ];
-let lossStreak = 0;
 let winStreak = 0;
-const lofiTracks = [
-    "https://www.bensound.com/bensound-music/bensound-slowmotion.mp3",
-    "https://www.bensound.com/bensound-music/bensound-dreams.mp3",
-    "https://www.bensound.com/bensound-music/bensound-relaxing.mp3"
-];
+let lossStreak = 0;
 
 function startGame() {
+    if (gameActive) return;
+
+    if (document.getElementById('result').innerText) {
+        cashout(); // Auto cashout before starting a new game if there are earnings
+    }
+
     const betAmount = parseFloat(document.getElementById('bet').value);
     if (betAmount > balance || betAmount <= 0) {
-        alert("Invalid bet amount!");
+        alert("Invalid bet amount.");
         return;
     }
 
     initialBet = betAmount;
-    document.getElementById('balance').innerText = (balance - initialBet).toFixed(2);
+    balance -= initialBet;
+    updateBalance();
+
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
     revealedCells = 0;
@@ -68,20 +72,19 @@ function handleClick(cell, type, index) {
         revealAll();
         document.getElementById('cashoutButton').disabled = true;
         playSound('bombSound');
-        document.getElementById('result').innerHTML = `<span style="color: red;">-$${initialBet.toFixed(2)} | -${(initialBet * 100).toFixed(2)}%</span>`;
+        document.getElementById('result').innerHTML = `<span style="color: red;">-$${initialBet.toFixed(2)} | -${((initialBet / balance) * 100).toFixed(2)}%</span>`;
         lossStreak++;
         winStreak = 0;
         checkAchievement("Lose 5 times in a row on the first click", lossStreak >= 5);
-        setTimeout(() => {
-            multiplier = 1;
-            updateBalance(0);
-        }, 1500);
     } else {
         cell.innerHTML = "💎";
         cell.classList.add('revealed');
         playSound('diamondSound');
         revealedCells++;
         calculateMultiplier();
+        if (revealedCells + bombPositions.length === 25) {
+            cashout(); // Automatically cash out if all non-bomb tiles are revealed
+        }
         lossStreak = 0;
     }
 }
@@ -102,10 +105,10 @@ function revealAll() {
 
 function calculateMultiplier() {
     let bombs = parseInt(document.getElementById('bombs').value);
-    let baseMultiplier = 1.1 + (bombs / 25) * 23.65;
-    multiplier = (baseMultiplier * Math.pow(1.05, revealedCells)).toFixed(2);
+    let baseMultiplier = 1.1 + (bombs - 1) * 0.3;
+    multiplier = baseMultiplier + (revealedCells * 0.1 + (revealedCells - 1) * 0.1);
     let multiplierElement = document.getElementById('multiplier');
-    multiplierElement.innerText = `x${multiplier}`;
+    multiplierElement.innerText = `x${multiplier.toFixed(2)}`;
     multiplierElement.style.animation = 'popAnimation 0.5s ease-in-out';
 }
 
@@ -113,9 +116,9 @@ function cashout() {
     if (gameActive) {
         const winnings = initialBet * multiplier;
         balance += winnings;
-        updateBalance(0);
+        updateBalance();
         document.getElementById('result').innerHTML = winnings >= initialBet
-            ? `<span style="color: green;">+$${winnings.toFixed(2)} | +${((multiplier - 1) * 100).toFixed(2)}%</span>`
+            ? `<span style="color: green;">+$${winnings.toFixed(2)} | +${((winnings - initialBet) / initialBet * 100).toFixed(2)}%</span>`
             : `<span style="color: red;">-$${initialBet.toFixed(2)} | -${(initialBet * 100).toFixed(2)}%</span>`;
         gameActive = false;
         revealAll();
@@ -135,8 +138,7 @@ function cashout() {
     }
 }
 
-function updateBalance(amount) {
-    balance += amount;
+function updateBalance() {
     document.getElementById('balance').innerText = balance.toFixed(2);
 }
 
@@ -160,6 +162,7 @@ function toggleAchievements() {
     achievementsElement.classList.toggle('hidden');
     playSound('achievementsOpeningSound');
     updateAchievementsView();
+    achievementsElement.scrollTop = 0; // Fix scroll issue by resetting to top
 }
 
 function updateAchievementsView() {
@@ -201,13 +204,23 @@ function toggleSound() {
 
 function toggleMusic() {
     const musicButton = document.getElementById('musicButton');
-    let musicPlayer = document.getElementById('lofiMusic');
-    if (musicButton.innerText === '🎵 Lofi') {
-        musicPlayer.play();
+    if (musicButton.innerText === '🎵 Lofi' || !currentTrack) {
+        // Stop current track
+        if (currentTrack) {
+            currentTrack.pause();
+            currentTrack.currentTime = 0;
+        }
+
+        // Randomly select a new track
+        const tracks = ['lofiMusic1', 'lofiMusic2', 'lofiMusic3', 'lofiMusic4'];
+        const selectedTrack = tracks[Math.floor(Math.random() * tracks.length)];
+        currentTrack = document.getElementById(selectedTrack);
+
+        // Play selected track
+        currentTrack.play();
         musicButton.innerText = '⏸️ Lofi';
     } else {
-        musicPlayer.pause();
-        musicPlayer.src = lofiTracks[Math.floor(Math.random() * lofiTracks.length)];
+        currentTrack.pause();
         musicButton.innerText = '🎵 Lofi';
     }
 }
