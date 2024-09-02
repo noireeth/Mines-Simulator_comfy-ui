@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mines Game</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="media/favicon.ico">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Mines Game</h1>
             <div class="money-counter">
-                Balance: $<span id="balance">5.00</span> 
+                Balance: $<span id="balance">5.00</span>
                 <span id="multiplier" class="multiplier"></span>
             </div>
             <div class="control-panel">
@@ -21,7 +22,7 @@
                 </div>
                 <div class="input-group">
                     <label for="bombs">Bombs:</label>
-                    <input type="number" id="bombs" value="3" min="1" max="24">
+                    <input type="number" id="bombs" value="1" min="1" max="24">
                 </div>
                 <button onclick="startGame()" class="soft-button">Bet</button>
                 <button id="cashoutButton" onclick="cashout()" disabled class="soft-button">Cashout</button>
@@ -47,7 +48,10 @@
     <audio id="achievementBannerSound" src="soundfx/achievement_banner.mp3"></audio>
     <audio id="achievementsOpeningSound" src="soundfx/achievementsopening.mp3"></audio>
     <audio id="rareSound" src="soundfx/rare.mp3"></audio>
-    <audio id="lofiMusic" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3"></audio>
+    <audio id="lofiMusic1" src="soundfx/Lofi1.mp3"></audio>
+    <audio id="lofiMusic2" src="soundfx/Lofi2.mp3"></audio>
+    <audio id="lofiMusic3" src="soundfx/Lofi3.mp3"></audio>
+    <audio id="lofiMusic4" src="soundfx/Lofi4.mp3"></audio>
 
     <script src="script.js"></script>
 </body>
