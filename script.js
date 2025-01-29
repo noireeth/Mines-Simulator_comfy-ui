@@ -162,7 +162,7 @@ function toggleAchievements() {
     achievementsElement.classList.toggle('hidden');
     playSound('achievementsOpeningSound');
     updateAchievementsView();
-    achievementsElement.scrollTop = 0; // Fix scroll issue by resetting to top
+    achievementsElement.scrollTop = 0;
 }
 
 function updateAchievementsView() {
